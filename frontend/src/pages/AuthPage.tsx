@@ -1,19 +1,20 @@
-import React from 'react';
-import AuthForm from '../components/AuthForm';
-import backgroundImage from '../images/figma/background-image.png';
-import '../CSS/AuthPage.css';
+import "../CSS/AuthPage.css";
+import AuthForm from "../components/AuthForm";
+import fundo1 from "../assets/fundo1.png";
 
-const AuthPage: React.FC = () => {
+const AuthPage = () => {
   return (
-    <div className="auth-container">
-      <div
-        className="auth-left"
-        style={{ backgroundImage: `url(${backgroundImage})` }}
-      ></div>
-      <div className="auth-right">
-        <AuthForm />
+    <>
+      <div className="auth-container">
+        <div
+          className="left-side"
+          style={{ backgroundImage: `url(${fundo1})` }}
+        ></div>
+        <div className="right-side">
+          <AuthForm />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
