@@ -1,8 +1,11 @@
+import { useState } from "react";
 import "../CSS/AuthForm.css";
 import logoLetreiro from "../assets/logo_letreiro.png";
 
 const AuthForm = () => {
-  return (
+    const [isLogin, setIsLogin] = useState(true);
+    
+    return (
     <>
       <div className="auth-form-container">
         <img src={logoLetreiro} alt="" />
@@ -17,7 +20,8 @@ const AuthForm = () => {
                 placeholder="Email"
               />
             </div>
-            <div className="input-group">
+          
+                <div className="input-group">
               <input
                 type="password"
                 id="password"
@@ -26,16 +30,38 @@ const AuthForm = () => {
                 placeholder="Password"
               />
             </div>
+        
+             {!isLogin && (
+              <div className="input-group">
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  required
+                  placeholder="Confirm Password"
+                />
+              </div>
+            )}
+            {isLogin && (
             <div className="forgot-password">
               <a href="/">Forgot password?</a>
             </div>
-            <button type="submit">Login</button>
-          </form>
+          )}
+
+          <button type="submit">{isLogin ? "Login" : "Sign Up"}</button>
+        </form>
           <div className="signup-link">
             <span className="line"></span>
-            <p>
-              Don’t have an account? <a href="/">Sign up</a>
-            </p>
+             <p>
+            {isLogin ? "Don’t have an account?" : "Already have an account?"}{" "}
+            <a href="#" onClick={(e) => {
+                e.preventDefault(); 
+                setIsLogin(!isLogin); 
+              }}
+            >
+              {isLogin ? "Sign up" : "Login"}
+            </a>
+          </p>
             <span className="line"></span>
           </div>
         </div>
