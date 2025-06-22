@@ -30,7 +30,10 @@ class UserController {
 
     async getUserProfile(req: Request, res: Response) {
         try {
-            const user = req.body.user;
+            const user = (req as any).user;
+            if (!user) {
+                return res.status(401).json({ error: "Usuário não autenticado." });
+            }
             return res.status(200).json({
                 message: "Perfil acessado com sucesso!",
                 user,
