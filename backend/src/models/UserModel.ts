@@ -7,7 +7,8 @@ class UserModel {
       id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
       email TEXT UNIQUE NOT NULL,
       password TEXT,
-      google_id TEXT UNIQUE
+      google_id TEXT UNIQUE,
+      name TEXT
     )
   `;
     await pool.query(query);
