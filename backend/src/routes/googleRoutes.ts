@@ -1,4 +1,4 @@
-import { handleGoogleCallback, redirectGoogle } from 'controllers/AuthGoogleController';
+import { handleGoogleCallback, redirectGoogle } from '../controllers/AuthGoogleController';
 import { Router } from 'express';
 
 const router = Router();
