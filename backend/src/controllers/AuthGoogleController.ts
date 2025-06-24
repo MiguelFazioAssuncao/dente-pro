@@ -58,7 +58,7 @@ export const handleGoogleCallback = async (req: Request, res: Response) => {
       { expiresIn: "7d" }
     );
 
-    res.redirect(`http://localhost:5173/home?token=${jwtToken}`);
+    res.redirect(`http://localhost:5173/auth/callback?token=${jwtToken}`);
   } catch (error) {
     console.error("Erro ao processar o callback do Google:", error);
     res.status(500).json({ error: "Erro ao processar o login com Google" });
