@@ -3,12 +3,13 @@ import { pool } from "../database/db";
 class UserModel {
   async createTable() {
     const query = `
-            CREATE TABLE IF NOT EXISTS users (
-                id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                email TEXT UNIQUE NOT NULL,
-                password TEXT NOT NULL
-            )
-        `;
+    CREATE TABLE IF NOT EXISTS users (
+      id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+      email TEXT UNIQUE NOT NULL,
+      password TEXT,
+      google_id TEXT UNIQUE
+    )
+  `;
     await pool.query(query);
   }
 
