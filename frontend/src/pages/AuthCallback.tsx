@@ -1,22 +1,21 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
-import { AuthContext } from '../AuthContext';
+import { useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthContext";
 
 const AuthCallback = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
 
     if (token) {
       login(token).then(() => {
-        navigate('/home');
+        navigate("/home");
       });
     } else {
-      navigate('/');
+      navigate("/");
     }
   }, [login, navigate]);
 
