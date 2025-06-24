@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { OAuth2Client } from "google-auth-library";
+import jwt from "jsonwebtoken";
 import { pool } from "../database/db";
 
 const client = new OAuth2Client(
@@ -42,18 +43,22 @@ export const handleGoogleCallback = async (req: Request, res: Response) => {
     let user = result.rows[0];
 
     if (!user) {
-      console.log({ email, name, googleId });
       const insertResult = await pool.query(
-        "INSERT INTO users (email, google_id) VALUES ($1, $2) RETURNING *",
-        [email, googleId]
+        "INSERT INTO users (email, google_id, name) VALUES ($1, $2, $3) RETURNING *",
+        [email, googleId, name]
       );
-
       user = insertResult.rows[0];
     }
 
     console.log("Usuário autenticado:", user);
 
-    res.redirect(`http://localhost:5173/home`);
+    const jwtToken = jwt.sign(
+      { id: user.id, email: user.email },
+      process.env.JWT_SECRET!,
+      { expiresIn: "7d" }
+    );
+
+    res.redirect(`http://localhost:5173/home?token=${jwtToken}`);
   } catch (error) {
     console.error("Erro ao processar o callback do Google:", error);
     res.status(500).json({ error: "Erro ao processar o login com Google" });
