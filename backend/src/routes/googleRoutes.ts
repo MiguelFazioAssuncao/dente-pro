@@ -3,7 +3,7 @@ import { Router } from 'express';
 
 const router = Router();
 
-router.get("google", async (req, res) => {
+router.get("/google", async (req, res) => {
     await redirectGoogle(req, res);
 });
 
