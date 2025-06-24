@@ -157,7 +157,11 @@ const AuthForm = () => {
         </div>
 
         <div className="google-auth-button">
-          <button>
+          <button
+            onClick={() => {
+              window.location.href = "http://localhost:3000/auth/google";
+            }}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               preserveAspectRatio="xMidYMid"
